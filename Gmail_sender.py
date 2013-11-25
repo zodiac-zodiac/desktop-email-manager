@@ -21,7 +21,7 @@ def mail(to, subject, text, attach):
    msg.attach(MIMEText(text))
 
    part = MIMEBase('application', 'octet-stream')
-   #part.set_payload(open(attach, 'rb').read())
+  
    Encoders.encode_base64(part)
    part.add_header('Content-Disposition',
            'attachment; filename="%s"' % os.path.basename(attach))
@@ -33,13 +33,13 @@ def mail(to, subject, text, attach):
    mailServer.ehlo()
    mailServer.login(gmail_user, gmail_pwd)
    mailServer.sendmail(gmail_user, to, msg.as_string())
-   #Should be mailServer.quit(), but that crashes...
+
    mailServer.close()
 print("mail dest : ")
 mail_dest = raw_input()
 mail(mail_dest,
    "subject",
-   "This is a email sent with python",
+   "Hi this is python",
    "")
 
 
